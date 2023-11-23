@@ -1,35 +1,57 @@
-import React, { useState } from 'react'
-import './Search.css'
-import MicIcon from '@mui/icons-material/Mic';
-import SearchIcon from '@mui/icons-material/Search';
-import Button from '@mui/material/Button';
-import {useNavigate} from "react-router-dom"
+import React, { useState } from "react";
+import "./Search.css";
+import MicIcon from "@mui/icons-material/Mic";
+import SearchIcon from "@mui/icons-material/Search";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import { useStateValue } from "../StateProvider";
+import { actionTypes } from "../reducer";
 
-function Search() {
-    const [ input, setInput] = useState('')
-    const history = useNavigate();
+function Search({ hideButtons = false }) {
+    const [{} ,dispatch] = useStateValue()
 
-    const search = e => {
-        e.preventDefault();
 
-        console.log('You hit the search button >>' , input)
+  const [input, setInput] = useState("");
+  const navigate = useNavigate();
 
-        history('/search')
-    }
+  const search = (e) => {
+    e.preventDefault();
+
+    console.log("You hit the search button >>", input);
+
+    dispatch({
+        type: actionTypes.SET_SEARCH_TERM,
+        term:input
+    })
+
+    navigate("/search"); // Use navigate as a function
+  };
+
   return (
-    <div className='search'>
-        <div className='search__input'>
-            <SearchIcon className="search__inputIcon"/>
-            <input value={input} onChange={e => setInput(e.target.value)}/>
-            <MicIcon/>
-        </div>
+    <form className="search">
+      <div className="search__input">
+        <SearchIcon className="search__inputIcon" />
+        <input value={input} onChange={(e) => setInput(e.target.value)} />
+        <MicIcon />
+      </div>
 
-        <div className='search__buttons'>
-            <Button type='submit' onClick={search} variant="outlined">Google Search</Button>
-            <Button variant="outlined">I'm Feeling Lucky</Button>
+      {!hideButtons ? (
+        <div className="search__buttons">
+          <Button type="submit" onClick={search} variant="outlined">
+            Google Search
+          </Button>
+          <Button variant="outlined">I'm Feeling Lucky</Button>
         </div>
-    </div>
-  )
+      ) : (
+        <div className="search__buttonsHidden">
+          <Button type="submit" onClick={search} variant="outlined">
+            Google Search
+          </Button>
+          <Button variant="outlined">I'm Feeling Lucky</Button>
+        </div>
+      )}
+    </form>
+  );
 }
 
-export default Search
+export default Search;
