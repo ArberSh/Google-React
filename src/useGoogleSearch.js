@@ -1,6 +1,6 @@
 import {useState,useEffect } from 'react'
 import API_KEY from './key'
-import axios from 'react'
+
 
 const CONTEXT_KEY = "c4016d12ca9684430"
 
@@ -21,6 +21,9 @@ const useGoogleSearch = (term) => {
 
         fetchData();
     }, [term])
+    return {data}
 }
+
+
 
 export default useGoogleSearch
