@@ -11,6 +11,7 @@ import NewspaperIcon from '@mui/icons-material/Newspaper';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import GoogleImg from '../assets/Google.png'
 
 function SearchPage() {
     const [{ term }] = useStateValue();
@@ -25,7 +26,7 @@ function SearchPage() {
     <div className='searchPage'>
         <div className='searchPage__header'>
             <Link to="/">
-                <img className="searchPage__logo" src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c51f.png"></img>
+                <img className="searchPage__logo" src={GoogleImg}></img>
             </Link>
 
             <div className='searchPage__headerBody'>
