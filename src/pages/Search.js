@@ -24,7 +24,7 @@ function Search({ hideButtons = false }) {
         term:input
     })
 
-    navigate("/search"); // Use navigate as a function
+    navigate("/search"); 
   };
 
   return (
